@@ -1,9 +1,13 @@
+// components/PostsList.jsx
+
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "../store/features/fetchPosts";
 import Post from "../components/Post";
 import { Skeleton, Stack } from "@chakra-ui/react";
 import { STATUS_MESSAGES } from "../utils/constants";
+import Nav from "../components/Nav";
+import CreatePostForm from "../components/CreatePostForm";
 
 const PostsList = () => {
   const dispatch = useDispatch();
@@ -13,6 +17,8 @@ const PostsList = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     if (status === "idle") {
@@ -28,6 +34,11 @@ const PostsList = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleEdit = (post) => {
+    setSelectedPost(post);
+    setIsEditMode(true);
   };
 
   const renderPageNumbers = () => {
@@ -72,39 +83,50 @@ const PostsList = () => {
     );
   } else if (status === "succeeded") {
     content = (
-      <div className="h-screen flex flex-col justify-between py-4">
-        <div className="flex flex-col items-center gap-4 mb-4 overflow-auto w-full lg:h-[90vh]">
-          {currentPosts.map((post) => (
-            <Post
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              body={post.body}
-            />
-          ))}
-        </div>
-        <div className="h-20">
-          <div className="flex justify-center items-center space-x-2">
-            <button
-              className="px-3 py-1 bg-gray-200 rounded-full"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <span className="text-gray-600">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              className="px-3 py-1 bg-gray-200 rounded-full"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
+      <div className="flex h-screen">
+        <Nav />
+        <div className="flex-grow flex flex-col items-center justify-between py-4">
+          <div className="flex flex-col items-center gap-4 mb-4 overflow-auto flex-1 px-3 lg:h-[90vh] lg:pt-8">
+            <div className="w-full px-3 mt-16 lg:mt-10">
+              <CreatePostForm
+                initialValues={selectedPost}
+                isEdit={isEditMode}
+                onClose={() => setIsEditMode(false)}
+              />
+            </div>
+            {currentPosts.map((post) => (
+              <Post
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                body={post.body}
+                onEdit={() => handleEdit(post)}
+              />
+            ))}
           </div>
-          <div className="flex justify-center items-center space-x-1 mt-4">
-            {renderPageNumbers()}
+          <div className="h-20">
+            <div className="flex justify-center items-center space-x-2">
+              <button
+                className="px-3 py-1 bg-gray-200 rounded-full"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span className="text-gray-600">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                className="px-3 py-1 bg-gray-200 rounded-full"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+            <div className="flex justify-center items-center space-x-1 mt-4">
+              {renderPageNumbers()}
+            </div>
           </div>
         </div>
       </div>
