@@ -1,5 +1,4 @@
-// components/PostDetails.jsx
-
+// PostDetails.tsx
 import React from "react";
 import {
   Modal,
@@ -14,7 +13,21 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const PostDetails = ({ id, title, body, onClose, onEdit }) => {
+interface PostDetailsProps {
+  id: number;
+  title: string;
+  body: string;
+  onClose: () => void;
+  onEdit: (post: { id: number; title: string; body: string }) => void;
+}
+
+const PostDetails: React.FC<PostDetailsProps> = ({
+  id,
+  title,
+  body,
+  onClose,
+  onEdit,
+}) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   const handleEditClick = () => {

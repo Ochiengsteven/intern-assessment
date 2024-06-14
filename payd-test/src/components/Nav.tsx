@@ -1,3 +1,4 @@
+// Nav.tsx
 import React, { useState } from "react";
 import { Box, IconButton, Flex, useBreakpointValue } from "@chakra-ui/react";
 import { HamburgerIcon, CalendarIcon, CloseIcon } from "@chakra-ui/icons";
@@ -5,7 +6,7 @@ import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
 
-const Nav = () => {
+const Nav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useBreakpointValue({ base: true, lg: false });
 
@@ -26,6 +27,7 @@ const Nav = () => {
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             onClick={toggleMenu}
             variant="outline"
+            aria-label="Toggle Navigation"
           />
           <img src={logo} alt="Logo" className="w-10 h-10" />
           {isOpen && (
@@ -41,6 +43,7 @@ const Nav = () => {
                   onClick={toggleMenu}
                   variant="outline"
                   className="mb-4"
+                  aria-label="Close Navigation"
                 />
                 <Flex direction="column" align="center">
                   <img src={logo} alt="Logo" className="w-10 h-10 mb-8" />

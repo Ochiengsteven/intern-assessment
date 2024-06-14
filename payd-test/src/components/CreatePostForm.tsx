@@ -1,5 +1,4 @@
-// components/CreatePostForm.jsx
-
+// CreatePostForm.tsx
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -18,11 +17,22 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import { useDispatch } from "react-redux";
-import { createPost } from "../store/features/createPost";
-import { editPost } from "../store/features/editPost";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { createPost } from "../store/feature/createPost";
+import { editPost } from "../store/feature/editPost";
 
-const CreatePostForm = ({
+interface CreatePostFormProps {
+  initialValues?: {
+    id?: number;
+    userId?: number;
+    title?: string;
+    body?: string;
+  };
+  isEdit?: boolean;
+  onClose?: () => void;
+}
+
+const CreatePostForm: React.FC<CreatePostFormProps> = ({
   initialValues = {},
   isEdit = false,
   onClose: parentOnClose,
@@ -32,7 +42,7 @@ const CreatePostForm = ({
   const [title, setTitle] = useState(initialValues?.title ?? "");
   const [body, setBody] = useState(initialValues?.body ?? "");
   const [postId, setPostId] = useState(initialValues?.id ?? null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isEdit && initialValues) {
@@ -44,7 +54,7 @@ const CreatePostForm = ({
     }
   }, [isEdit, initialValues, onOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEdit && postId) {
       dispatch(editPost({ id: postId, title, body, userId }));

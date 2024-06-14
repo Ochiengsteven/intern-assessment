@@ -1,9 +1,17 @@
+// Post.tsx
 import React, { useState } from "react";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import PostDetails from "./PostDetails";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
-const Post = ({ id, title, body, onEdit }) => {
+interface PostProps {
+  id: number;
+  title: string;
+  body: string;
+  onEdit: (post: { id: number; title: string; body: string }) => void;
+}
+
+const Post: React.FC<PostProps> = ({ id, title, body, onEdit }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);

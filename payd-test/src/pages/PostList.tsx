@@ -1,23 +1,30 @@
-// components/PostsList.jsx
-
+// PostList.tsx
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchPosts } from "../store/features/fetchPosts";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { fetchPosts } from "../store/feature/fetchPosts";
 import Post from "../components/Post";
 import { Skeleton, Stack } from "@chakra-ui/react";
 import { STATUS_MESSAGES } from "../utils/constants";
 import Nav from "../components/Nav";
 import CreatePostForm from "../components/CreatePostForm";
+import { RootState } from "../store";
 
-const PostsList = () => {
-  const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
-  const status = useSelector((state) => state.posts.status);
-  const error = useSelector((state) => state.posts.error);
+interface PostType {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+}
+
+const PostsList: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const posts = useAppSelector((state: RootState) => state.posts.posts);
+  const status = useAppSelector((state: RootState) => state.posts.status);
+  const error = useAppSelector((state: RootState) => state.posts.error);
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<PostType | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
@@ -32,11 +39,11 @@ const PostsList = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
-  const handleEdit = (post) => {
+  const handleEdit = (post: PostType) => {
     setSelectedPost(post);
     setIsEditMode(true);
   };
