@@ -1,30 +1,142 @@
-# React + TypeScript + Vite
+# Payd - Test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<a name="readme-top"></a>
 
-Currently, two official plugins are available:
+<!-- TABLE OF CONTENTS -->
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📗 Table of Contents
 
-## Expanding the ESLint configuration
+- [ Payd-test ](#-payd-test-)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [🚀 Live Demo ](#-live-demo-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Install](#install)
+    - [Usage](#usage)
+    - [Deployment](#deployment)
+  - [👥 Authors ](#-authors-)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<!-- PROJECT DESCRIPTION -->
 
-- Configure the top-level `parserOptions` property like this:
+# 📖 Payd test <a name="about-project"></a>
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+This project for _Posts_ is built in React.js, web development concepts, Chakra UI, and Tailwind CSS. It takes into the account the frontend development principles, UI aesthetics, and user experience.
+
+## 🛠 Built With <a name="built-with"></a>
+
+### Tech Stack <a name="tech-stack"></a>
+
+#### Client
+
+- React
+- TailwindCSS
+- ChakraUI
+
+#### Server
+
+- JSON Server
+<!-- Features -->
+
+### Key Features <a name="key-features"></a>
+
+#### Navigation
+
+Implemented a side navigation bar to enhance navigation and organization within the application and a hamburger menu for responsiveness in mobile and small screens.
+
+<!-- ![Screenshot](./images/Screenshot%202.png) -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LIVE DEMO -->
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- You can find the website [here](https://zerakis.netlify.app/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+To get a local copy up and running, follow these steps.
+
+### Prerequisites
+
+In order to run this project you need:
+
+- A Chrome browser
+- npm
+- node
+- git
+
+### Setup
+
+Clone this repository to your desired folder:
+
+```sh
+  $ cd my-folder
+  $ git clone https://github.com/Ochiengsteven/intern-assessment.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Install
+
+Install the prerequisites this project using:
+
+```sh
+  cd intern-assessment
+  npm install
+```
+
+### Usage
+
+To run the project:
+
+<!-- ### 1. Start the server
+
+- To start the JSON Server after installing dependencies, run the following command:
+
+```sh
+  json-server --watch db.json -p 5000
+```
+
+### 2. Start client -->
+
+- Run the following command to start the app:
+
+```sh
+  npm run dev
+```
+
+<!--
+Example command:
+
+sh
+  bin/rails test test/models/article_test.rb
+--->
+
+### Deployment
+
+I deployed this project using: **Netlify**
+
+<!--
+Example:
+
+sh
+
+ -->
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## 👥 Author <a name="authors"></a>
+
+👤 **Ochieng Steven Otieno**
+
+- GitHub: [@Ochiengsteven](https://github.com/Ochiengsteven)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/steven-ochieng-a43125179/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
