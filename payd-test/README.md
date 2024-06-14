@@ -53,8 +53,6 @@ Implemented a side navigation bar to enhance navigation and organization within 
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- You can find the website [here](https://zerakis.netlify.app/)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -94,39 +92,11 @@ Install the prerequisites this project using:
 
 To run the project:
 
-<!-- ### 1. Start the server
-
-- To start the JSON Server after installing dependencies, run the following command:
-
-```sh
-  json-server --watch db.json -p 5000
-```
-
-### 2. Start client -->
-
 - Run the following command to start the app:
 
 ```sh
   npm run dev
 ```
-
-<!--
-Example command:
-
-sh
-  bin/rails test test/models/article_test.rb
---->
-
-### Deployment
-
-I deployed this project using: **Netlify**
-
-<!--
-Example:
-
-sh
-
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
