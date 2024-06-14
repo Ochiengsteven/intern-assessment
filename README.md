@@ -53,7 +53,9 @@ Implemented a side navigation bar to enhance navigation and organization within 
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-[![Watch the video](https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg)](https://youtu.be/d2I6IRZgmQE)
+- Click the video demo below to watch
+
+[![Watch the video](https://github.com/Ochiengsteven/intern-assessment/blob/implementation/ochiengsteven/payd-test/demo/screen.png)](https://youtu.be/d2I6IRZgmQE)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
