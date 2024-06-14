@@ -16,8 +16,7 @@
     - [Setup](#setup)
     - [Install](#install)
     - [Usage](#usage)
-    - [Deployment](#deployment)
-  - [👥 Authors ](#-authors-)
+  - [👥 Author ](#-authors-)
 
 <!-- PROJECT DESCRIPTION -->
 
