@@ -52,7 +52,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({
           <Text>{body}</Text>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={onClose} colorScheme="blue">
+          <Button onClick={onClose} colorScheme="red">
             {isMobile ? "Back" : "Close"}
           </Button>
         </ModalFooter>

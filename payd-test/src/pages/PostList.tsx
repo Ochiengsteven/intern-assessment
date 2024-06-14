@@ -96,6 +96,7 @@ const PostsList: React.FC = () => {
           <div className="flex flex-col items-center gap-4 mb-4 overflow-auto flex-1 px-3 lg:h-[90vh] lg:pt-8">
             <div className="w-full px-3 mt-16 lg:mt-10">
               <CreatePostForm
+                // @ts-expect-error - initial value is not a number
                 initialValues={selectedPost}
                 isEdit={isEditMode}
                 onClose={() => setIsEditMode(false)}

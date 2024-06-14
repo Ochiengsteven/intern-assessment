@@ -11,10 +11,10 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useAppDispatch } from "../hooks/reduxHooks";
@@ -43,24 +43,43 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
   const [body, setBody] = useState(initialValues?.body ?? "");
   const [postId, setPostId] = useState(initialValues?.id ?? null);
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   useEffect(() => {
     if (isEdit && initialValues) {
-      setPostId(initialValues.id);
-      setUserId(initialValues.userId);
-      setTitle(initialValues.title);
-      setBody(initialValues.body);
+      setPostId(initialValues.id ?? null);
+      setUserId(initialValues.userId ?? 1);
+      setTitle(initialValues.title ?? "");
+      setBody(initialValues.body ?? "");
       onOpen();
     }
   }, [isEdit, initialValues, onOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const newPostId = postId ?? Math.random();
+
     if (isEdit && postId) {
       dispatch(editPost({ id: postId, title, body, userId }));
+      toast({
+        title: "Post updated.",
+        description: "Your post has been successfully updated.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     } else {
-      dispatch(createPost({ title, body, userId }));
+      // @ts-expect-error - newPostId is not a number
+      dispatch(createPost({ id: newPostId, title, body, userId }));
+      toast({
+        title: "Post created.",
+        description: "Your post has been successfully created.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     }
+
     setUserId(1);
     setTitle("");
     setBody("");
@@ -74,7 +93,7 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
         <Button
           onClick={onOpen}
           leftIcon={<AddIcon />}
-          colorScheme="teal"
+          colorScheme="green"
           mb="4"
         >
           Create Post
@@ -107,7 +126,6 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
               <FormControl id="title" isRequired>
                 <FormLabel>Title</FormLabel>
                 <Input
-                  type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -124,11 +142,6 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
               </Button>
             </Box>
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

@@ -35,7 +35,7 @@ const Nav: React.FC = () => {
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              className="fixed top-0 left-0 w-1/2 h-full bg-white z-40"
+              className="fixed top-0 left-0 w-1/2 sm:w-1/3 h-full bg-white z-40"
             >
               <Box className="p-4">
                 <IconButton
@@ -46,9 +46,8 @@ const Nav: React.FC = () => {
                   aria-label="Close Navigation"
                 />
                 <Flex direction="column" align="center">
-                  <img src={logo} alt="Logo" className="w-10 h-10 mb-8" />
                   <Box
-                    className="bg-[#19A873] text-white rounded-lg p-2 mb-4"
+                    className="bg-[#19A873] w-2/3 text-white rounded-lg p-2 mb-4"
                     mx="4"
                     display="flex"
                     alignItems="center"

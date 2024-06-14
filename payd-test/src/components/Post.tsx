@@ -23,7 +23,7 @@ const Post: React.FC<PostProps> = ({ id, title, body, onEdit }) => {
       onClick={openModal}
     >
       <div className="flex items-center justify-between">
-        <Text className="text-sm text-gray-600">post {id}</Text>
+        <Text className="text-sm text-gray-600">Post {id}</Text>
         <ArrowForwardIcon
           boxSize={4}
           color="gray.500"
