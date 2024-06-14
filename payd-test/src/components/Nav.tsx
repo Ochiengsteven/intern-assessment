@@ -8,7 +8,7 @@ const MotionBox = motion(Box);
 
 const Nav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = useBreakpointValue({ base: true, xl: false });
 
   const toggleMenu = () => setIsOpen(!isOpen);
 

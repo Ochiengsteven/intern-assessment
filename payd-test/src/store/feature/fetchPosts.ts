@@ -27,6 +27,9 @@ export const fetchPosts = createAsyncThunk<Post[]>(
   "posts/fetchPosts",
   async () => {
     const response = await axios.get(API_BASE_URL);
+    // delay by 3s to simulate slow network
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     return response.data;
   }
 );

@@ -1,52 +1,28 @@
 // PostList.tsx
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { fetchPosts } from "../store/feature/fetchPosts";
+import React from "react";
+import { motion } from "framer-motion";
+import { usePosts } from "../hooks/postHooks";
 import Post from "../components/Post";
-import { Skeleton, Stack } from "@chakra-ui/react";
-import { STATUS_MESSAGES } from "../utils/constants";
 import Nav from "../components/Nav";
 import CreatePostForm from "../components/CreatePostForm";
-import { RootState } from "../store";
-
-interface PostType {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-}
+import { STATUS_MESSAGES } from "../utils/constants";
+import Loader from "../components/Loader";
+import IntroText from "../components/IntroText";
 
 const PostsList: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const posts = useAppSelector((state: RootState) => state.posts.posts);
-  const status = useAppSelector((state: RootState) => state.posts.status);
-  const error = useAppSelector((state: RootState) => state.posts.error);
-
-  const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
-  const [selectedPost, setSelectedPost] = useState<PostType | null>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
-
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchPosts());
-    }
-  }, [status, dispatch]);
-
-  const totalPages = Math.ceil(posts.length / postsPerPage);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handleEdit = (post: PostType) => {
-    setSelectedPost(post);
-    setIsEditMode(true);
-  };
+  const {
+    posts,
+    status,
+    error,
+    currentPage,
+    totalPages,
+    selectedPost,
+    isEditMode,
+    handlePageChange,
+    handleEdit,
+    setIsEditMode,
+  } = usePosts(postsPerPage);
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -79,37 +55,37 @@ const PostsList: React.FC = () => {
   let content;
 
   if (status === "loading") {
-    content = (
-      <div>
-        <Stack>
-          <Skeleton height="20px" />
-          <Skeleton height="20px" />
-          <Skeleton height="20px" />
-        </Stack>
-      </div>
-    );
+    content = <Loader />;
   } else if (status === "succeeded") {
     content = (
       <div className="flex h-screen">
         <Nav />
         <div className="flex-grow flex flex-col items-center justify-between py-4">
           <div className="flex flex-col items-center gap-4 mb-4 overflow-auto flex-1 px-3 lg:h-[90vh] lg:pt-8">
+            <IntroText />
             <div className="w-full px-3 mt-16 lg:mt-10">
               <CreatePostForm
-                // @ts-expect-error - initial value is not a number
+                // @ts-expect-error implicitly has an 'any' type.
                 initialValues={selectedPost}
                 isEdit={isEditMode}
                 onClose={() => setIsEditMode(false)}
               />
             </div>
-            {currentPosts.map((post) => (
-              <Post
+            {posts.map((post, index) => (
+              <motion.div
                 key={post.id}
-                id={post.id}
-                title={post.title}
-                body={post.body}
-                onEdit={() => handleEdit(post)}
-              />
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="w-full"
+              >
+                <Post
+                  id={post.id}
+                  title={post.title}
+                  body={post.body}
+                  onEdit={() => handleEdit(post)}
+                />
+              </motion.div>
             ))}
           </div>
           <div className="h-20">
